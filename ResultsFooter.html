@@ -1,0 +1,38 @@
+</div>
+<div class="show-all" style="display: none;"><input type="button" value="Show All" class="art-button event-show-all"></div>
+<script src="/js/ics-min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+});
+setTimeout(function () {
+    $(document).ready(function(){
+    if (decodeURI((RegExp('show' + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]) !== 'all') {
+        while ($('.e-b').length > 5) {
+            $('.e-b').last().remove();
+            $('.show-all').show();
+        }
+        if ($('body').attr('event-on') == 'yes') {$('.show-all').show();}
+    }
+    $('.event-signup').click(function() {
+        window.location = $(this).parents('.e-b').find('.event-signup-target a').attr('href');
+    });
+    $('.event-show-all').click(function() {
+        window.location = window.location.href+'?show=all';
+        // $('.e-b').hide();
+    });
+    $('.cal-img').click(function() {
+        var eventname = $(this).attr('eventname');
+        var description = $(this).parent().parent().find('.e-t h1').text().replace(/\n/g, '\\n');
+        description += '\\n\\n';
+        clone = $(this).parent().parent().find('.event-left').clone();
+        clone.find('center, .registration-over, .event-signup-target, .cal-img, script').remove();
+        description += clone.text().replace(/\n/g, '\\n').replace(/(\\n)+/g, '\\n').replace(/:(\\n)/g, ': ');
+        description += $(this).parent().parent().children('.event-right').text().replace(/\n/g, '\\n').replace(':', '');
+        description = description.replace(/(\\n)(\\n)+/g, '\\n\\n');
+        var location = $(this).attr('location');
+        var start = $(this).attr('start');
+        var end = $(this).attr('end');
+        download_ics('event', eventname, description, location, start, end);
+    });
+})}, 3000);
+</script>

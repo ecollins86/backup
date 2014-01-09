@@ -1,0 +1,53 @@
+<div class="e-r">
+<div class="e-b type-[EVENTTYPEID]">
+<div class="e-t">
+<h1>[EVENTTYPENAME]</h1>
+</div>
+<div class="event-left">
+<div class="event-info">
+<div class="e-i-l">Starting Price:</div>
+<div class="e-i-t">[NORMALPRICE]</div>
+</div>
+<div class="event-info">
+<div class="e-i-l">Signup Deadline:</div>
+<div class="e-i-t">[evProp:registrationclosedate]</div>
+</div>
+<div class="event-info">
+<div class="e-i-l">Start Date:</div>
+<div class="e-i-t">[STARTDATE] at [STARTTIME]</div>
+</div>
+<img class="cal-img" style="margin-left: 110px;" eventname="[EVENTTYPENAME]" description="" location="[LOCATION]" start="[STARTDATE]" end="[ENDDATE]" src="https://www.pianeia.com/desktopmodules/Thirdi.EventBooking/images/actcal.gif" />
+<div class="event-info">
+<div class="e-i-l">Location:</div>
+<div class="e-i-t">[LOCATION]</div>
+</div>
+<div class="event-info">
+<div class="e-i-l">Venue:</div>
+<div class="e-i-t">[VENUE]</div>
+</div>
+<div class="registration-over" date="[evProp:registrationclosedate]">Online registration is no longer available.<br>Please call for availability: 402-392-1611</div>
+<center>
+<input type="button" value="Register" date="[evProp:registrationclosedate]" class="art-button event-signup">
+</center>
+<script type="text/javascript">
+</script>
+<div class="event-signup-target" style="display: none;">[BOOKINGLINK]</div>
+</div>
+<div class="event-right">
+[SHORTDESCRIPTION]
+</div>
+</div>
+</div>
+<script type="text/javascript">
+if (new Date('[evProp:registrationclosedate]') < new Date()) {
+$('input[date=[evProp:registrationclosedate]]').hide();
+$('.registration-over[date=[evProp:registrationclosedate]]').show();
+}
+on = false;
+if (decodeURI((RegExp('show' + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]) !== 'all') {
+while ($('.e-b').length > 5) {
+$('.e-b').last().remove();
+$('body').attr('event-on', 'yes');
+}
+}
+</script>
